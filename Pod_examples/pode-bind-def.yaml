@@ -1,0 +1,11 @@
+apiVersion: v1 
+kind: Binding #we use binding to add existing pod with a node
+metadata:
+  name: pod_name
+
+target:
+  apiVersion: v1
+  kind: Node
+  name: node_name
+
+

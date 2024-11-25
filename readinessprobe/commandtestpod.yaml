@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod
+spec:  
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      ports:
+        - containerPort: 8080
+
+      #running command test  
+      readinessProbe:
+        exec:
+          command:
+            - cat
+            - /app/is_ready

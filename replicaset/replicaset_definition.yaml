@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset_name
+  labels: #labels used for replicaset
+    app: App1 
+    function: Front-end 
+  annotations: #extra information like version, mail etc.
+    buildversion: "1.34"
+    

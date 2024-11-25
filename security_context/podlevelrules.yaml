@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod
+spec:
+#security rules added at the pod level
+  securityContext:
+    runAsUser: 1000 #user id setting
+
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      command: ["sleep","3600"]

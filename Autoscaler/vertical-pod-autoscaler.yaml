@@ -1,0 +1,13 @@
+apiVersion: "autoscaling.k8s.io/v1"
+kind: VerticalPodAutoscaler
+metadata:
+   name: webapp-vpa
+spec:
+  targetRef:
+  #pod details
+    apiVersion: "v1"
+    kind: Pod 
+    name: simple-webapp-color
+  #strategy to update the pods   
+  updateStrategy:
+    updateMode: "off" #or initial or auto

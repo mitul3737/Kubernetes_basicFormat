@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Config
+clusters:
+  - name: minikube-playground
+    cluster:
+      certificate-authority: /home/hector/.minikube/ca.crt
+      server: https://192.168.39.217:8443
+users:
+  - name: minikube-admin
+    user:
+      client-certificate: /home/hector/.minikube/profiles/minikube/client.crt
+      client-key: /home/hector/.minikube/profiles/minikube/client.key
+contexts:
+  - name: minikube-admin@minikube-playground
+    context:
+      cluster: minikube-playground
+      namespace: default #when using this context, automatically move to default namesapce
+      user: minikube-admin
+current-context: minikube-admin@minikube-playground #default context

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+#replicaset's metadata
+metadata:
+  name:  replicaset_name
+  labels:
+    app: label_for_replicaset
+    function: label_for_replicaset
+spec:
+  selector:
+    matchLabels:
+      app: App1 #label to look for from a pod in-order to connect
+
+  replicas: 3 #number of pods in the replicaset
+
+  template: #here we can copy paste exactly all the data of a pod  from metadata to last
+    metadata:
+      labels:
+        app: App1
+        function: Front-end
+    spec:
+      containers: 
+        - name: container_name
+          image: official_image
+
+      

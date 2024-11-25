@@ -1,0 +1,22 @@
+#it adds one pod to each node of a cluster
+apiVersion: apps/v1
+kind: DaemonSet
+#Daemonset's metadata
+metadata:
+  name:  daemon_name
+spec:
+  selector:
+    matchLabels:
+      app: App1 #label to look for from a pod in-order to connect
+
+  template: #here we can copy paste exactly all the data of a pod  from metadata to last
+    metadata:
+      labels:
+        app: App1
+        function: Front-end
+    spec:
+      containers: 
+        - name: container_name
+          image: official_image
+
+      

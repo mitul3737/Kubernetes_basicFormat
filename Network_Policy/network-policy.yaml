@@ -1,0 +1,21 @@
+#Here we are allowing ingress traffic from api-pod (API pod) to db (Database pod)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy #policy name  of  our choice
+spec:
+  podSelector:
+    matchLabels:
+      role: db #the label we set for the database API
+  policyTypes:
+    - Ingress #allowing only ingress traffic to the database pod
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              name: api-pod #label set for the API pod
+      ports: #allowing ingress traffic to this port
+        - protocol: TCP
+          port: 3306
+
+

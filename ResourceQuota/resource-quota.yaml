@@ -1,0 +1,14 @@
+#works  in the namespace level to specify total limit for pods
+apiVersion: v1 
+kind: ResourceQuota
+metadata:
+  name: resource_quota_for_Me
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory : 4Gi
+    limits.cpu: "10"
+    limits.memory: 10Gi
+
+
+    

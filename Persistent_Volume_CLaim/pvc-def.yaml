@@ -1,0 +1,12 @@
+#PVCs are  used to claim Persistent volume of our choice
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+    - ReadWriteOnce #it can be different as well
+  resources:
+    requests:
+      storage: 500Mi #500 MB
+      

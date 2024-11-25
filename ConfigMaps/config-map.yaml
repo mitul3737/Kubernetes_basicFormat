@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config #config file name. We refer to this config file in the pod name.
+data:
+  #environment values are saved as key value pair here
+  APP_COLOR: blue
+  APP_MODE: prod

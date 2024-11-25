@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo_app
+  labels:
+    name: demo_label
+spec:
+  containers:
+    - name: name_of_container
+      image: real_image_name
+      ports:
+        - containerPort: 8080
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: "1"
+        limits:
+          memory: "2Gi"
+          cpu: "2"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: size
+                operator: In #or NotIn,Exist
+                values:
+                  - Small #label used in nodes
+                  - Medium #label used in nodes

@@ -1,0 +1,9 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: my-service
+spec:
+#checks the pods/deployment based on selector
+  selector:
+    version: v1
+    #we will update the version to v2 once the testing is done on deployment myapp-green

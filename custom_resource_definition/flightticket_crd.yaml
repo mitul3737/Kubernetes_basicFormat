@@ -1,0 +1,37 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: flighttickets.flights.com
+spec:
+  group: flights.com
+  names:
+    kind: FlightTicket #kind
+    #plural will be set as the name in api-resources
+    singular: flighttcket
+    plural: flighttickets
+    shortNames: #short name set for the kind
+      - ft
+  scope: Namespaced
+  
+  versions:
+    - name: v1 #version name (Version can be alpha, beta, Generally Active - GA)
+      served: true #set if this version is serverd through API
+      storage: true #set if  this version is a storage version or not
+      
+      schema: #schema sets which field accepts what value
+        #here we used openAPIV3Scema
+        # we  did set  from and to field to accept string value and number to accept integer value
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                from:
+                  type: string
+                to:
+                  type: string
+                number:
+                  type: integer
+                  minimum: 1 #minimum value for number field
+                  maximum: 10 #maximum value for number field

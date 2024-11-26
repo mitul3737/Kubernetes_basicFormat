@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql #satefulset name
+  labels:
+    app: mysql #statefulset label
+
+spec:
+  #selector to match the pods
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql-h #headless server name
+
+  template:
+    metadata:
+      labels:
+        app: mysql #pod selectors
+      spec:
+        containers:
+        - name: mysql #pod name (There will be unique pod created using Statefulsets)
+          image: mysql
+  replicas: 3
+  podManagementPolicy: Parallel #to stop the order of the pods (scale from first to last, scale down from last to first)
+
+#create Persistent Volume Claim for each pod (pasted from pvc's def file)
+volumeClaimTemplates:
+- metadata:
+    name: myclaim
+  spec:
+  accessModes:
+    - ReadWriteOnce #it can be different as well
+  storageClassName: google-storage #adding storage class name to use that instead of pv-def.yaml file
+  resources:
+    requests:
+      storage: 500Mi #500 MB

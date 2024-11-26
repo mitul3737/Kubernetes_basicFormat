@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: random-number-generator
+spec:
+  containers:
+    - name: alpine
+      image: alpine
+      command: ["/bin/sh","-c"] #command to apply
+      args: ["shuf -i 0-100 -n 1 >> /opt/number.out"] #generates a number between 1-100 and saves it on the number.out file
+      volumeMounts:
+        - mountPath: /opt #the /opt  folder has the output
+          name: data-volume #volume name on the container
+  volumes:
+    - name: data-volume #volume name on the container
+      #using AWS Volume
+      awsElasticBlockStore:
+        volumeID: <demo-volumeID>
+        fsType: ext4
+        

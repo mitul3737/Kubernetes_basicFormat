@@ -1,0 +1,10 @@
+#this is a custom resource 
+#Here we want to book 2 flight tickets
+apiVersion: flights.com/v1
+kind: FlightTicket
+metadata:
+  name: my-flight-ticket
+spec:
+  from: Dhaka
+  to: San Francisco
+  number: 2

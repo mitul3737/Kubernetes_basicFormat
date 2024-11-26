@@ -1,0 +1,28 @@
+#this is the primary deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-primary
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  #the deployment matches the selector to track number of pods
+  selector:
+    matchLabels:
+      app: front-end
+  #teplate for the pods within the deployment
+  template:
+    metadata:
+      name: myapp-pod
+      labels: 
+        version: v1 
+        app: front-end #common selector for primary and canary deployment
+      spec:
+        containers:
+        - name: app-container
+          image: myapp-image:1.0 #old version
+  replicas: 5 #5 pods to be created within the deployment
+  
+        
+    

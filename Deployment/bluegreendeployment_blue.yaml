@@ -1,0 +1,27 @@
+#this is the blue deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-blue
+  labels:
+    app: myapp
+    type: frontend
+spec:
+  #the deployment matches the selector to track number of pods
+  selector:
+    matchLabels:
+      version: v1 #old pod version tag
+  #teplate for the pods within the deployment
+  template:
+    metadata:
+      name: myapp-pod
+      labels: 
+        version: v1 #old pod version tag
+      spec:
+        containers:
+        - name: app-container
+          image: myapp-image:1.0 #old version
+  replicas: 5 #5 pods to be created within the deployment
+  
+        
+    

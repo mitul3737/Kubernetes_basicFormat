@@ -1,0 +1,20 @@
+#here we are targetting the webapp-pod. When the pod is deleted, we want to record 3 states RequestStarted, ResponseComplete, Panic
+apiVersion: audit.k8s.io/v1
+kind: Policy
+#there are stages like RequestReceived, RequestStarted, ResponseComplete, Panic which can be recorded in events
+omitStages:: ["RequestReceived"] #here we don't want to include RequestReceived message
+rules: 
+  - namespace: ["prod-namespace"] #our targetted namespace
+    verbs: ['delete'] #when a deletre operation is done, we will record it stages
+    resources:
+      - groups: " " #pods belong to core api group which is shown by ""
+        resources: ["pods"] #we want to target pods
+        resourceName: ["webapp-pod"] #specific pod name to target
+    level: None #Action to take
+    #if the value is 'None',events won’t be logged for the rule. Meaning if the pod called 
+    #webapp-pod us deleted in the namespace, no events will be logged .
+    #If the value is 'Metadata', only the metadata such as timestamp, 
+    #username, resources, verbs etc will be logged
+    #If we use 'Request', we can get metadata and request body logged.
+    #We can use 'RequestResponse' to log the metadata, request body and response body
+    

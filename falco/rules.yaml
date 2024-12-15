@@ -1,0 +1,6 @@
+#alert us when someone opens the bash shell in a container.
+- rules: Detect Shell inside a container
+  desc:  Alert if a shell such as bash is open inside the container
+  condition: container.id!= host and proc.name = bash
+  output: Bash Shell Opened (user=%user.name %container.id)
+  priority: WARNING
